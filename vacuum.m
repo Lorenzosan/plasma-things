@@ -1,12 +1,14 @@
-%potenziale di vuoto
+% This file permits to calculate the vacuum electric potential
+% in a Penning-Malmberg cylindrical trap at a user-defined offset.
 
-%dimensioni della trappola
-Rw=0.09/2;
+% Trap dimensions
+Rw=0.09/2; % wall radius
 l=0.15;
-ls=0.15; %lunghezza singolo elettrodo S
-lc=0.09; %lunghezza singolo elettrodo C
-dz=0.001; %separazione elettrodi
-Nel=12; %numero elettrodi
+ls=0.15; % S-type Electrode length
+lc=0.09; % C-type Electrode length
+dz=0.001; % Separation beetween electrodes
+Nel=12; % Total number of electrodes
+
 zn=zeros(1,2*Nel);
 zn(1) = 0;
 zn(2) = 0.15; %GND
@@ -33,19 +35,9 @@ zn(22)= 1.239; %C8
 zn(23)= 1.240;
 zn(24)= 1.390; %SH
 
-L = 1.39;
+L = zn(24);
 
-% for j = 2:2*Nel
-%     if mod(j,2)==0
-%     zn(j)=zn(j-1)+l;
-%     else
-%     zn(j)=zn(j-1)+dz;    
-%     end
-% end
-% L=l*Nel+dz*(Nel-1);
-
-
-%assegno i potenziali
+% Potentials assignment
 prompt={'GND','C1','C2','S8','C4','S2','C5','S4','C6','C7','C8','SH'};
 default={'0','0','0','0','0','0','0','0','0','0','0','0'};
 dlgtitle='Electrode voltages';
@@ -65,9 +57,9 @@ v(11)=str2double(answer{11});
 v(12)=str2double(answer{12});
 
 k=pi/L;
-%r=linspace(-Rw,Rw,10000);
 z=linspace(0,L,5000);
 
+% Offset definition
 prompt={'D'};
 default={'0'};
 dlgtitle='offset';
@@ -93,15 +85,6 @@ for zind = 1:length(z)
     end
 end
 
-% for zind = 1:length(z)
-%     for n = 1:200
-%         a=0;
-%         for p = 1:length(v)
-%             a=a+v(p)*(cos(k*n*((l*p)-l))-cos(k*n*l*p))/(n*pi);
-%         end
-%         ybess=besseli(0,D*k*n)/besseli(0,Rw*k*n)*sin(k*n*z(zind));
-%         phi_vuoto_z(zind)=phi_vuoto_z(zind)+a*ybess;
-%     end
-%     phi_vuoto_z(zind)=2*phi_vuoto_z(zind);
-% end
 plot(z, phi_vuoto_z, '-'); hold on; grid on;
+xlabel('Longitudinal position in trap [m]')
+ylabel('Electric potential [V]')
