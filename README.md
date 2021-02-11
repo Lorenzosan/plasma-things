@@ -7,8 +7,14 @@ vacuum.m -> The script permits the calculation of the vacuum potential in the tr
             
 cart_to_pol.m ->
 
-thomas_algorithm.m ->
-
-poisson.m ->
-            
-            
+thomas_algorithm.m -> Given the system AX=B, where A is a tridiagonal matrix, this script takes as input the matrix A and
+                      the vector B and returns the solution X.
+                      
+poisson.m -> This script solves the Poisson equation in the trap. You need to put in the same folder cart_to_pol.m, 
+             thomas_algorithm.m and the electrical density matrix. The density filename shall be indicated in the 
+             section 3 of source code.
+             The ouput consists in three plots:
+               * Plasma density
+               * Electric potential inside the trap
+               * Equipotential lines
+               
