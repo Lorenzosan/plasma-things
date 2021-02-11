@@ -7,7 +7,7 @@ vacuum.m -> The script permits the calculation of the vacuum potential in the tr
             
 cart_to_pol.m ->
 
-Thomas_algorithm.m ->
+thomas_algorithm.m ->
 
 poisson.m ->
             
